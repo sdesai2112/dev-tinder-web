@@ -26,7 +26,7 @@ const UserCard = ({ user }) => {
   return (
     <div className="mx-auto card bg-base-300 w-[400px] h-[500px] shadow-sm my-[20px]">
       <figure>
-        <img src={photoUrl} alt="Shoes" />
+        <img src={photoUrl} alt="Image" />
       </figure>
       <div className="card-body">
         <h2 className="card-title">{firstName + " " + lastName}</h2>
