@@ -40,9 +40,9 @@ const EditProfile = ({ user }) => {
   return (
     <>
       <div className="flex">
-        <div className="mx-auto card bg-base-300 w-[400px] h-[500px] shadow-sm my-[20px]">
+        <div className="mx-auto card bg-base-300 w-[400px] h-[450px] shadow-sm my-[20px]">
           <div className="card-body">
-            <div>
+            <div className="mt-[5px]">
               <label className="input validator">
                 <svg
                   className="h-[1em] opacity-50"
@@ -72,13 +72,13 @@ const EditProfile = ({ user }) => {
                   title="Only letters, numbers or dash"
                 />
               </label>
-              <p className="validator-hint">
+              {/* <p className="validator-hint">
                 Must be 3 to 30 characters
                 <br />
                 containing only letters, numbers or dash
-              </p>
+              </p> */}
             </div>
-            <div>
+            <div className="mt-[5px]">
               <label className="input validator">
                 <svg
                   className="h-[1em] opacity-50"
@@ -108,13 +108,13 @@ const EditProfile = ({ user }) => {
                   title="Only letters, numbers or dash"
                 />
               </label>
-              <p className="validator-hint">
+              {/* <p className="validator-hint">
                 Must be 3 to 30 characters
                 <br />
                 containing only letters, numbers or dash
-              </p>
+              </p> */}
             </div>
-            <div>
+            <div className="mt-[5px]">
               <input
                 type="text"
                 className="input"
@@ -129,7 +129,7 @@ const EditProfile = ({ user }) => {
                 <option value="others"></option>
               </datalist>
             </div>
-            <div>
+            <div className="mt-[5px]">
               <input
                 type="number"
                 className="input validator"
@@ -141,37 +141,39 @@ const EditProfile = ({ user }) => {
                 max="100"
                 title="Must be between be 1 to 100"
               />
-              <p className="validator-hint">Age</p>
+              {/* <p className="validator-hint">Age</p> */}
             </div>
-            <label className="input validator">
-              <svg
-                className="h-[1em] opacity-50"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-              >
-                <g
-                  strokeLinejoin="round"
-                  strokeLinecap="round"
-                  strokeWidth="2.5"
-                  fill="none"
-                  stroke="currentColor"
+            <div className="mt-[5px]">
+              <label className="input validator">
+                <svg
+                  className="h-[1em] opacity-50"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
                 >
-                  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
-                  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
-                </g>
-              </svg>
-              <input
-                type="url"
-                required
-                onChange={(e) => setPhotoUrl(e.target.value)}
-                value={photoUrl}
-                placeholder="https://"
-                pattern="^(https?://)?([a-zA-Z0-9]([a-zA-Z0-9\-].*[a-zA-Z0-9])?\.)+[a-zA-Z].*$"
-                title="Must be valid URL"
-              />
-            </label>
-            <p className="validator-hint">Must be valid URL</p>
-            <div>
+                  <g
+                    strokeLinejoin="round"
+                    strokeLinecap="round"
+                    strokeWidth="2.5"
+                    fill="none"
+                    stroke="currentColor"
+                  >
+                    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                    <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                  </g>
+                </svg>
+                <input
+                  type="url"
+                  required
+                  onChange={(e) => setPhotoUrl(e.target.value)}
+                  value={photoUrl}
+                  placeholder="https://"
+                  pattern="^(https?://)?([a-zA-Z0-9]([a-zA-Z0-9\-].*[a-zA-Z0-9])?\.)+[a-zA-Z].*$"
+                  title="Must be valid URL"
+                />
+              </label>
+              {/* <p className="validator-hint">Must be valid URL</p> */}
+            </div>
+            <div className="mt-[5px]">
               <input
                 type="text"
                 placeholder="Type about yourself"
@@ -180,7 +182,7 @@ const EditProfile = ({ user }) => {
                 onChange={(e) => setAbout(e.target.value)}
               />
             </div>
-            <div>
+            <div className="mx-auto mt-[15px]">
               <button
                 className="btn btn-active btn-primary"
                 onClick={handleSignUp}
