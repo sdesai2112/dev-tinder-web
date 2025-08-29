@@ -28,8 +28,6 @@ const EditProfile = ({ user }) => {
       },
       { withCredentials: true }
     );
-
-    console.log(res);
     dispatch(addUser(res?.data?.data));
     setShowToast(true);
     setTimeout(() => {
@@ -39,8 +37,8 @@ const EditProfile = ({ user }) => {
 
   return (
     <>
-      <div className="flex">
-        <div className="mx-auto card bg-base-300 w-[400px] h-[450px] shadow-sm my-[20px]">
+      <div className="flex justify-center my-[20px]">
+        <div className="card bg-base-content w-[400px] h-[470px] shadow-sm">
           <div className="card-body">
             <div className="mt-[5px]">
               <label className="input validator">
@@ -72,11 +70,6 @@ const EditProfile = ({ user }) => {
                   title="Only letters, numbers or dash"
                 />
               </label>
-              {/* <p className="validator-hint">
-                Must be 3 to 30 characters
-                <br />
-                containing only letters, numbers or dash
-              </p> */}
             </div>
             <div className="mt-[5px]">
               <label className="input validator">
@@ -108,11 +101,6 @@ const EditProfile = ({ user }) => {
                   title="Only letters, numbers or dash"
                 />
               </label>
-              {/* <p className="validator-hint">
-                Must be 3 to 30 characters
-                <br />
-                containing only letters, numbers or dash
-              </p> */}
             </div>
             <div className="mt-[5px]">
               <input
@@ -192,9 +180,12 @@ const EditProfile = ({ user }) => {
             </div>
           </div>
         </div>
-        <UserCard
-          user={{ firstName, lastName, age, gender, photoUrl, about }}
-        />
+        <div className="ml-[20px]">
+          <UserCard
+            user={{ firstName, lastName, age, gender, photoUrl, about }}
+            isEdit={true}
+          />
+        </div>
       </div>
       {showToast && (
         <div className="toast toast-top toast-center">

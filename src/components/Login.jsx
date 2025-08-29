@@ -6,10 +6,10 @@ import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../utils/constants";
 
 const Login = () => {
-  const [emailId, setEmailId] = useState("mrunalidesai@gmail.com");
-  const [password, setPassword] = useState("Mrunali@123");
-  const [firstName, setFirstName] = useState("Mrunali");
-  const [lastName, setLastName] = useState("Desai");
+  const [emailId, setEmailId] = useState(null);
+  const [password, setPassword] = useState(null);
+  const [firstName, setFirstName] = useState(null);
+  const [lastName, setLastName] = useState(null);
   const [errMessage, setErrMessage] = useState(null);
   const [isLogin, setIsLogin] = useState(true);
   const dispatch = useDispatch();
@@ -25,8 +25,6 @@ const Login = () => {
         },
         { withCredentials: true }
       );
-
-      console.log(res?.data);
       dispatch(addUser(res?.data));
       navigate("/");
     } catch (err) {
@@ -47,8 +45,6 @@ const Login = () => {
         },
         { withCredentials: true }
       );
-
-      console.log(res?.data);
       dispatch(addUser(res?.data));
       navigate("/profile");
     } catch (err) {
@@ -58,7 +54,7 @@ const Login = () => {
   };
 
   return (
-    <div className="flex justify-center mt-[20px]">
+    <div className="flex justify-center mt-[60px]">
       <div className="card card-border bg-base-100 w-[400px]">
         <div className="card-body">
           <h2 className="card-title justify-center">
@@ -95,11 +91,6 @@ const Login = () => {
                   title="Only letters, numbers or dash"
                 />
               </label>
-              {/* <p className="validator-hint hidden">
-                Must be 3 to 30 characters
-                <br />
-                containing only letters, numbers or dash
-              </p> */}
             </>
           )}
           {!isLogin && (
@@ -133,11 +124,6 @@ const Login = () => {
                   title="Only letters, numbers or dash"
                 />
               </label>
-              {/* <p className="validator-hint hidden">
-                Must be 3 to 30 characters
-                <br />
-                containing only letters, numbers or dash
-              </p> */}
             </>
           )}
           <div>
@@ -166,9 +152,6 @@ const Login = () => {
                 required
               />
             </label>
-            {/* <div className="validator-hint hidden">
-              Enter valid email address
-            </div> */}
           </div>
           <div>
             <label className="input validator">
@@ -204,16 +187,9 @@ const Login = () => {
                 title="Must be more than 8 characters, including number, lowercase letter, uppercase letter"
               />
             </label>
-            {/* <p className="validator-hint hidden">
-              Must be more than 8 characters, including
-              <br />
-              At least one number <br />
-              At least one lowercase letter <br />
-              At least one uppercase letter
-            </p> */}
           </div>
           {errMessage && <p className="m-auto text-error">{errMessage}</p>}
-          <div className="card-actions justify-center">
+          <div className="card-actions justify-center mt-[5px]">
             <button
               className="btn btn-primary"
               onClick={isLogin ? handleLogin : handleSignUp}
@@ -222,7 +198,7 @@ const Login = () => {
             </button>
           </div>
           <p
-            className="m-auto cursor-pointer"
+            className="mx-auto mt-[10px] cursor-pointer"
             onClick={() => {
               setIsLogin(!isLogin);
             }}

@@ -18,12 +18,17 @@ const NavBar = () => {
       console.error("Logout failed", err);
     }
   };
+
   return (
     <div className="navbar bg-base-300 shadow-sm mx-4">
       <div className="flex-1">
-        <Link to={"/"} className="btn btn-ghost text-2xl">
-          DevTinder
-        </Link>
+        {user ? (
+          <Link to={"/"} className="btn btn-ghost text-2xl">
+            {"DevTinder"}
+          </Link>
+        ) : (
+          <h3 className="ml-[10px]">DevTinder</h3>
+        )}
       </div>
       {user && (
         <div className="flex gap-2">

@@ -26,6 +26,7 @@ const Feed = () => {
   };
   return (
     <div>
+      {console.log(feedData)}
       {feedData && <UserCard key={feedData[0]?._id} user={feedData[0]} />}
     </div>
   );

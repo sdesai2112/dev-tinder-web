@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { addRequests, removeRequest } from "../utils/slices/requestSlice";
@@ -7,31 +8,39 @@ import { addRequests, removeRequest } from "../utils/slices/requestSlice";
 const Requests = () => {
   const requests = useSelector((store) => store.requests);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchRequests();
   }, []);
 
   const fetchRequests = async () => {
-    const res = await axios.get(BASE_URL + "/user/requests", {
-      withCredentials: true,
-    });
-
-    console.log(res?.data?.connectionRequests);
-    dispatch(addRequests(res?.data?.connectionRequests));
+    try {
+      const res = await axios.get(BASE_URL + "/user/requests", {
+        withCredentials: true,
+      });
+      dispatch(addRequests(res?.data?.connectionRequests));
+    } catch (err) {
+      console.log(err);
+      if (err?.status === 401) {
+        navigate("/login");
+      }
+    }
   };
 
   const reviewRequests = async (status, _id) => {
     try {
-      const res = await axios.post(
+      await axios.post(
         BASE_URL + "/request/review/" + status + "/" + _id,
         {},
         { withCredentials: true }
       );
-      console.log(res?.data);
       dispatch(removeRequest(_id));
     } catch (err) {
       console.log(err);
+      if (err?.status === 401) {
+        navigate("/login");
+      }
     }
   };
   return (
@@ -44,23 +53,34 @@ const Requests = () => {
           return (
             <div
               key={request?._id}
-              className="flex justify-between items-center m-4 p-4 rounded-lg bg-base-300 w-1/2 mx-auto"
+              className="flex items-center rounded-lg bg-base-300 w-[600px] mx-auto mb-[10px]"
             >
-              <div>
+              <div className="w-[150px]">
                 <img
                   alt="photo"
-                  className="w-[50px] h-[50x] rounded-full"
+                  className="w-[100px] h-[100px] rounded-full object-cover"
                   src={photoUrl}
                 />
               </div>
-              <div className="text-left mx-10">
+              <div className="text-left mx-10 col-span-4 w-[300px]">
                 <h2 className="font-bold text-xl">
                   {firstName + " " + lastName}
                 </h2>
                 {age && gender && <p>{age + ", " + gender}</p>}
-                <p>{about}</p>
+                <div className="relative group inline-block">
+                  <p>
+                    {about.length > 137
+                      ? about?.substring(0, 137) + "..."
+                      : about}
+                  </p>
+                  {about.length > 137 && (
+                    <div className="absolute bottom-full mb-2 hidden max-w-xs rounded-lg bg-base-content px-3 py-2 text-sm text-base-100 shadow-lg group-hover:block break-words whitespace-pre-line z-10">
+                      {about}
+                    </div>
+                  )}
+                </div>
               </div>
-              <div>
+              <div className="w-[150px]">
                 <button
                   onClick={() => {
                     reviewRequests("rejected", request?._id);
@@ -73,7 +93,7 @@ const Requests = () => {
                   onClick={() => {
                     reviewRequests("accepted", request?._id);
                   }}
-                  className="btn btn-secondary mx-2"
+                  className="btn btn-secondary mx-2 mt-[10px]"
                 >
                   Accept
                 </button>
